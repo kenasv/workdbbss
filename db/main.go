@@ -5,6 +5,7 @@ package db
 import (
 	"log"
 	"os"
+	"time"
 
 	pg "github.com/go-pg/pg"
 )
@@ -14,9 +15,13 @@ func Connect() *pg.DB {
 
 	//Параметры подсоединения к БД. Хорошо бы вынести в отдельный файл
 	opts := &pg.Options{
-		User:     "postgres",
-		Password: "17032016",
-		Addr:     "localhost:5434",
+		User:         "postgres",
+		Password:     "17032016",
+		Addr:         "localhost:5434",
+		DialTimeout:  30 * time.Second,
+		ReadTimeout:  1 * time.Minute,
+		WriteTimeout: 1 * time.Minute,
+		IdleTimeout:  30 * time.Minute,
 	}
 	var db *pg.DB = pg.Connect(opts)
 	if db == nil {

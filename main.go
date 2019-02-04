@@ -18,6 +18,9 @@ func main() {
 	pg_db := db.Connect()
 	//SavePL(pg_db)
 	db.PlaceHoldSelect(pg_db)
+	DeletePl(pg_db)
+	UpdateDiapazon(pg_db)
+	GetPl(pg_db)
 }
 
 func SavePL(dbRef *pg.DB) {
@@ -55,4 +58,26 @@ func SavePL(dbRef *pg.DB) {
 	//newPL.SaveReturn(dbRef)
 	totalItems := []*db.Dostup101{newPL1, newPL2}
 	newPL1.SaveMulti(dbRef, totalItems)
+}
+
+func DeletePl(dbRef *pg.DB) {
+	newPL1 := &db.Dostup101{
+		Diapazon: "2600",
+	}
+	newPL1.DeletePl(dbRef)
+}
+
+func UpdateDiapazon(dbRef *pg.DB) {
+	newPL1 := &db.Dostup101{
+		ID:       "002",
+		Diapazon: "2600",
+	}
+	newPL1.UpdateDiapazon(dbRef)
+}
+
+func GetPl(dbRef *pg.DB) {
+	newPL1 := &db.Dostup101{
+		ID: "001",
+	}
+	newPL1.GetPl(dbRef)
 }

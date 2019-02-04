@@ -72,3 +72,48 @@ func (pl *Dostup101) SaveMulti(db *pg.DB, items []*Dostup101) error {
 	log.Printf("Many new PL  %s insert in DB. \n")
 	return nil
 }
+
+func (pl *Dostup101) DeletePl(db *pg.DB) error {
+
+	//db.Delete(pl)
+	_, deleteErr := db.Model(pl).Where("diapazon = ?diapazon").Delete()
+
+	if deleteErr != nil {
+		log.Printf("Error delete PL in DB, Reason: v/n", deleteErr)
+		return deleteErr
+	}
+	log.Printf("delete PL  %s  in DB. \n", pl.Diapazon)
+	return nil
+}
+
+func (pl *Dostup101) UpdateDiapazon(db *pg.DB) error {
+
+	tx, txErr := db.Begin()
+	if txErr != nil {
+		log.Printf("Error while openning tx, Reason: %v\n", txErr)
+		return txErr
+	}
+
+	_, updateErr := tx.Model(pl).Set("diapazon = ?diapazon").Where("id = ?id").Update()
+
+	if updateErr != nil {
+		log.Printf("Error update PL in DB, Reason: v/n", updateErr)
+		tx.Rollback()
+		return updateErr
+	}
+	tx.Commit()
+	log.Printf("update PL  %s  in DB. \n", pl.Diapazon)
+	return nil
+}
+
+func (pl *Dostup101) GetPl(db *pg.DB) error {
+
+	getErr := db.Select(pl)
+
+	if getErr != nil {
+		log.Printf("Error get PL in DB, Reason: v/n", getErr)
+		return getErr
+	}
+	log.Printf("get PL  %s  in DB. \n", *pl)
+	return nil
+}
