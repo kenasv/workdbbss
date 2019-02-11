@@ -32,6 +32,26 @@ func main() {
 	GetPl(pg_db)
 }
 
+func SavePL1(dbRef *pg.DB) {
+
+	newPL1 := &db.Dostup101{
+		ID:             "018",
+		Diapazon:       "2600",
+		Adres:          "Vladimir",
+		Infrastructura: "Stolb",
+		Prinadlegnost:  "MTS",
+		Dostup:         "free",
+		Kluch:          "Mottura",
+		Aparatnaa:      "Intercross",
+		AD:             "Vasily Pupkin",
+		Contact:        "8-900-800-90-90",
+		WGS:            "54.12345, 43.12345",
+		Primechanie:    "test2",
+		//IsActive:       true,
+	}
+	newPL1.Save(dbRef)
+}
+
 func SavePL(dbRef *pg.DB) {
 
 	newPL1 := &db.Dostup101{
