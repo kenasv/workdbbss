@@ -4,15 +4,24 @@ package main
 //Библиотеки, которые используются в этом пакете
 import (
 	"log"
+	"net/http"
 
 	"github.com/go-pg/pg"
 
 	//	"os"
 	db "./db"
+	handlers "./handlers"
+	//"html/template"
 )
 
 //Основная функция с которой стартует программа
 func main() {
+
+	http.HandleFunc("/new", handlers.News)
+	err := http.ListenAndServe(":9090", nil)
+	if err != nil {
+		log.Fatal("ListenAndServe: ", err)
+	}
 
 	log.Printf("Proga start.\n")
 	pg_db := db.Connect()
