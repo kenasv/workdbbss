@@ -18,12 +18,21 @@ func News(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("method: insert Pl")
 	} else {
 		r.ParseForm()
-		fmt.Println("namePl:", r.Form["namePl"])
-
-		Xaxaxa := r.FormValue("namePl")
-		fmt.Println(Xaxaxa)
+		one1 := r.FormValue("insert_ID")
+		one2 := r.FormValue("insert_Diapazon")
+		one3 := r.FormValue("insert_Adres")
+		one4 := r.FormValue("insert_Infrastructura")
+		one5 := r.FormValue("insert_Prinadlegnost")
+		one6 := r.FormValue("insert_Dostup")
+		one7 := r.FormValue("insert_Kluch")
+		one8 := r.FormValue("insert_Aparatnaa")
+		one9 := r.FormValue("insert_AD")
+		one10 := r.FormValue("insert_Contact")
+		one11 := r.FormValue("insert_WGS")
+		one12 := r.FormValue("insert_Primechanie")
+		fmt.Println("Xaxaxa")
 		pg_db := db.Connect()
-		SavePL1(pg_db, Xaxaxa)
+		SavePL2(pg_db, one1, one2, one3, one4, one5, one6, one7, one8, one9, one10, one11, one12)
 	}
 
 }
@@ -75,3 +84,38 @@ func SavePL1(dbRef *pg.DB, one string) {
 	}
 	newPL1.Save(dbRef)
 }
+
+func SavePL2(dbRef *pg.DB, one1 string, one2 string, one3 string, one4 string, one5 string, one6 string, one7 string, one8 string, one9 string, one10 string, one11 string, one12 string) {
+
+	newPL1 := &db.Dostup101{
+		ID:             one1,
+		Diapazon:       one2,
+		Adres:          one3,
+		Infrastructura: one4,
+		Prinadlegnost:  one5,
+		Dostup:         one6,
+		Kluch:          one7,
+		Aparatnaa:      one8,
+		AD:             one9,
+		Contact:        one10,
+		WGS:            one11,
+		Primechanie:    one12,
+		//IsActive:       true,
+	}
+	newPL1.Save(dbRef)
+}
+
+//type Front struct {
+//	ID             string
+//	Diapazon       string
+//	Adres          string
+//	Infrastructura string
+//	Prinadlegnost  string
+//	Dostup         string
+//	Kluch          string
+//	Aparatnaa      string
+//	AD             string
+//	Contact        string
+//	WGS            string
+//	Primechanie    string
+//}
