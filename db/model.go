@@ -76,13 +76,13 @@ func (pl *Dostup101) SaveMulti(db *pg.DB, items []*Dostup101) error {
 func (pl *Dostup101) DeletePl(db *pg.DB) error {
 
 	//db.Delete(pl)
-	_, deleteErr := db.Model(pl).Where("diapazon = ?diapazon").Delete()
+	_, deleteErr := db.Model(pl).Where("id = ?id").Delete()
 
 	if deleteErr != nil {
 		log.Printf("Error delete PL in DB, Reason: v/n", deleteErr)
 		return deleteErr
 	}
-	log.Printf("delete PL  %s  in DB. \n", pl.Diapazon)
+	log.Printf("delete PL  %s  in DB. \n", pl.ID)
 	return nil
 }
 

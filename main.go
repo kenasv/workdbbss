@@ -16,7 +16,7 @@ import (
 
 //Основная функция с которой стартует программа
 func main() {
-
+	http.HandleFunc("/del", handlers.Del)
 	http.HandleFunc("/new", handlers.News)
 	err := http.ListenAndServe(":9090", nil)
 	if err != nil {
